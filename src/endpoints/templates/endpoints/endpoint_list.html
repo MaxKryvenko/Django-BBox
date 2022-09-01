@@ -1,0 +1,72 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content1%}
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'endpoint-filter.js' %}"></script>
+
+
+<div class="filter">
+<h6>Switching Control</h6>
+<ul id="switching_control" style="list-style-type: none;">
+	{%for instance in switching_control%}
+	<li>
+		<input class="filter-checkbox" data-filter="switching_control" value="{{instance.switching_control__id}}" type="checkbox" />&nbsp;
+		{{instance.switching_control__switching_control}}
+	</li>
+{%endfor%}
+</ul>
+
+<h6>Media Type</h6>
+<ul id="media_type" style="list-style-type: none;">
+	{%for instance in media_type%}
+	<li>
+		<input class="filter-checkbox" data-filter="media_type" value="{{instance.media_type__id}}" type="checkbox" />&nbsp;
+		{{instance.media_type__media_type}}
+	</li>
+{%endfor%}
+</ul>
+</div>
+
+<div class="content">
+	{%for instance in endpoint_list%}
+	<div class="product">
+		<p>{{instance.id}} - <a href='{{ instance.get_absolute_url }}'>{{instance.sku}}</a></p>
+		{%if instance.main_image%}
+			<img src="{{ instance.main_image.url }}" alt="My Image" height="100px" width="100px">
+		{%endif%}
+		<p>{{instance.description}}</p>
+		<ul>
+			<li>{{instance.solution}}&reg; solution</li>
+			<li>{{instance.head_count}}-head {{instance.endpoint_type}} type {{instance.endpoint_mode}} over {{instance.solution.protocol}} network</li>
+			<li>Native {{instance.videotype}} with up to {{instance.max_resolution}}</li>
+			<li>{{instance.media_type.all|join:",  "}}</li>
+		</ul>
+	</div>
+{%endfor%}
+</div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+{%endblock%}

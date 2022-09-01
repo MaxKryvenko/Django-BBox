@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+
+{%block content1%}
+{{object_list}}
+
+{%for instance in object_list%}
+
+
+<p>{{instance.id}} - <a href='{{ instance.get_absolute_url }}'>{{instance.title}}</a></p>
+{%if instance.main_image%}
+	<img src="{{ instance.main_image.url }}" alt="My Image">
+{%endif%}
+{%endfor%}
+{%endblock%}

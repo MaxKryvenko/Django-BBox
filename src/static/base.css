@@ -1,0 +1,49 @@
+.bodystyle {
+	display: grid;
+
+	grid-template-areas: 
+	"navbar navbar navbar navbar navbar navbar navbar"
+	"filter content content content content content content"
+	"filter content content content content content content";
+	grid-gap: 10px;
+	/*padding: 10px;*/
+}
+
+.navbar {
+	grid-area: navbar;
+	display: flex;
+	/*margin: 10px;*/
+	/*padding: 20px;*/
+	font-size: 30px;
+	background-color: dodgerblue;
+	justify-content: flex-end;
+	border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 800px) {
+	.navbar {
+		flex-direction: column;
+	}
+}
+
+.navbar_item {
+	margin: 20px;
+}
+
+.filter {
+	grid-area: filter;
+	background-color: lawngreen;
+}
+
+.content {
+	grid-area: content;
+	background-color: #ccc;
+	display: grid;
+	grid-gap:  10px;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.product {
+	grid-column: span 1;
+	background-color: lightgray;
+}
